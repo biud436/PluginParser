@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node src/index.js"
   },
+  "nodemonConfig": {
+    "ignore": ["data/*"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/biud436/MZ.git"

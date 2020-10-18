@@ -43,7 +43,7 @@ class App extends EventEmitter {
 
         this._unknownData = [];
     }
-
+    
     /**
      * 플러그인 파일을 읽습니다.
      */
@@ -311,7 +311,7 @@ class App extends EventEmitter {
     /**
      * 플러그인 파일 목록을 읽습니다.
      */
-    readList() {
+    readList(cb) {
         
         // 리스트에 있는 모든 파일의 라인을 차례로 읽습니다.
         this._list.forEach((f, index) => {
@@ -344,15 +344,16 @@ class App extends EventEmitter {
                         JSON.stringify(this._allData, null, "\t"), 
                         "utf8"
                     );
+                    cb();
                 }
 
             });
         });
     }
 
-    start() {
+    start(cb) {
         this.readPluginFiles();
-        this.readList();
+        this.readList(cb);
     }
 }
 

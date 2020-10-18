@@ -7,6 +7,7 @@ const cors = require("cors");
 const fs = require('fs');
 const socketio = require("socket.io");
 const stringify = require('json-stringify');
+const {PluginParser} = require("./parser");
 
 // 익스프레스 객체 생성
 const app = express();
@@ -23,15 +24,22 @@ app.use(cors());
 
 const router = express.Router();
 
-const myData = fs.readFileSync(path.resolve("data", "RS_Window_KorNameEdit.json"), 'utf8');
-
 // AJAX 라우팅 설정
 router.route("/parse/plugin").post((req, res) => {
 
     const query = req.body;
 
     if(query.name) {
-        res.send(JSON.stringify(myData, null, "\t"));
+        const argv = {
+            "f": path.resolve(path.basename(query.name)),
+        };
+
+        const parser = new PluginParser(argv);
+        parser.start(() => {
+            const myData = fs.readFileSync(path.resolve("data", "RS_Window_KorNameEdit.json"), 'utf8');        
+            req.app.io.sockets.emit("message", myData);
+        });
+
     } else {
         res.redirect("/");
     }
@@ -64,6 +72,8 @@ database.init();
 
 // 웹소켓 통신 시작
 const io = socketio.listen(server);
+app.io = io;
+
 io.sockets.on("connection", socket => {
     const id = socket.id;
     const {_peername} = socket.request.connection;

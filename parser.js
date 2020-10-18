@@ -14,6 +14,6 @@ if(argv.help) {
     return;
 }
 
-const app = new App(argv);
-app.start();
-
+module.exports = {
+    PluginParser: App,
+};
