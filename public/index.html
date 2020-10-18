@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="container">
+        <form action="/parse/plugin" method="post">
+            <fieldset>
+                <dd>
+                    <dt><label for="name"></label><input type="file" id="name" name="name"></dt>
+                    <dt><input type="button" value="파싱 시작" id="submit"></dt>
+                </dd>
+            </fieldset>
+        </form>          
         <div class="middle">
-            <form action="/parse/plugin" method="post">
-                <fieldset>
-                    <dd>
-                        <dt><label for="name"></label><input type="file" id="name" name="name"></dt>
-                        <dt><input type="button" value="파싱하기" id="submit"></dt>
-                    </dd>
-                </fieldset>
-            </form>            
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js" integrity="sha512-AcZyhRP/tbAEsXCCGlziPun5iFvcSUpEz2jKkx0blkYKbxU81F+iq8FURwPn1sYFeksJ+sDDrI5XujsqSobWdQ==" crossorigin="anonymous"></script>
