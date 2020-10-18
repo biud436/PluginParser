@@ -4,7 +4,7 @@ const static = require("serve-static");
 const bodyParser = require("body-parser");
 const path = require('path');
 const cors = require("cors");
-const fs = require('fs');
+const fs = require('fs-extra');
 const socketio = require("socket.io");
 const stringify = require('json-stringify');
 const {PluginParser} = require("./parser");
@@ -34,10 +34,21 @@ router.route("/parse/plugin").post((req, res) => {
             "f": path.resolve(path.basename(query.name)),
         };
 
+        const list = fs.readdirSync(path.resolve("data"));
+        list.forEach(i => {
+            const realpath = path.resolve("data", i);
+            if(fs.existsSync(realpath)) {
+                fs.removeSync(realpath);
+            }
+        });
+
         const parser = new PluginParser(argv);
         parser.start(() => {
-            const myData = fs.readFileSync(path.resolve("data", "RS_Window_KorNameEdit.json"), 'utf8');        
-            req.app.io.sockets.emit("message", myData);
+            const list = fs.readdirSync(path.resolve("data"));
+            list.forEach(i => {
+                const myData = fs.readFileSync( path.resolve("data", i), "utf8" );
+                req.app.io.sockets.emit("message", myData);
+            });
         });
 
     } else {

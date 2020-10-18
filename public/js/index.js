@@ -32,6 +32,10 @@ class App {
         document.querySelector(".middle").appendChild(newDiv);        
     }
 
+    clear() {
+        document.querySelector(".middle").innerHTML = "";
+    }
+
     load(url) {
         return new Promise((resolve, reject) => {
             /**
@@ -62,6 +66,8 @@ class App {
     start() {
 
         document.querySelector("#submit").addEventListener("click", async () => {
+            this.clear();
+            
             await this.load("http://127.0.0.1:9010/parse/plugin").then(data => {
                 this.write(JSON.parse(data));
             }).catch(err => {
