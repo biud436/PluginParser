@@ -41,12 +41,13 @@ class App {
             /**
              * @type {HTMLInputElement}
              */
-            const input = document.querySelector("#name");
+            const formData = new FormData();
+            formData.append("name", document.querySelector("input[type='file']").files[0]);
 
             const xhr = new XMLHttpRequest();
             xhr.open("POST", url);
 
-            xhr.setRequestHeader('Content-Type', "application/json");
+            // xhr.setRequestHeader('Content-Type', "application/json");
             xhr.onload = () => {
                 if(xhr.status === 200) {
                     resolve(xhr.responseText);
@@ -57,9 +58,10 @@ class App {
             xhr.onerror = (err) => {
                 reject(err);
             }
-            xhr.send(JSON.stringify({
-                name: input.value
-            }));
+            xhr.send(formData);
+            // xhr.send(JSON.stringify({
+            //     name: input.value
+            // }));
         });
     }
 

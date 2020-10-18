@@ -8,11 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <form action="/parse/plugin" method="post">
+        <form action="/parse/plugin" enctype="multipart/form-data" method="post">
             <fieldset>
                 <dd>
                     <dt><label for="name"></label><input type="file" id="name" name="name"></dt>
-                    <dt><input type="button" value="파싱 시작" id="submit"></dt>
+                    <dt><input type="button" value="업로드 및 파싱 시작" id="submit" name="submit"></dt>
                 </dd>
             </fieldset>
         </form>          

@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const socketio = require("socket.io");
 const stringify = require('json-stringify');
 const {PluginParser} = require("./parser");
+const multer = require("multer");
 
 // 익스프레스 객체 생성
 const app = express();
@@ -17,21 +18,38 @@ app.set("port", process.env.PORT || 9010);
 
 // 미들웨어 등록
 app.use(static(path.resolve("public")));
+app.use("/uploads", static(path.resolve("uploads")));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 
+const upload = multer({
+    storage: multer.diskStorage( {
+        destination: (req, file, callback) => {
+            callback(null, "uploads");
+        },
+        filename: (req, file, callback) => {
+            callback(null, file.originalname);
+        },
+    } ),
+    limits: {
+        files: 20,
+        fileSize: 1024 * 1024 * 1024 * 2, 
+    }
+});
+
 const router = express.Router();
 
 // AJAX 라우팅 설정
-router.route("/parse/plugin").post((req, res) => {
+router.route("/parse/plugin").post(upload.single("name"), (req, res) => {
 
     const query = req.body;
+    const file = req.file;
 
-    if(query.name) {
+    if(file) {
         const argv = {
-            "f": path.resolve(path.basename(query.name)),
+            "f": path.resolve("uploads", path.basename(file.originalname)),
         };
 
         const list = fs.readdirSync(path.resolve("data"));

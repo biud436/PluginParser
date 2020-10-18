@@ -1,0 +1,1 @@
+{"name":"RS_InputDialog","status":true,"description":"화면에 텍스트 에디터 띄워 텍스트 값을 변수로 받습니다 <RS_InputDialog>","parameters":{"textBox Width":"","textBox Height":"","variable ID":"","Text Hint":"Please enter the value...","Max Length":""}}
