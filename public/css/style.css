@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
@@ -8,7 +11,7 @@ body {
 }
 
 .container {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: relative;
     display: flex;
@@ -19,7 +22,7 @@ body {
 
 .middle {
     width: 100%;
-    height: 50%;
+    height: 80%;
     background-color: #ccc;
     align-self: center;   
     overflow: scroll;
@@ -31,12 +34,36 @@ fieldset {
     outline: none;
     border: none;
     display: flex;
-    flex: 1 1 0;
-    flex-direction: column;
+    flex: 2 1 0;
+    justify-items: flex-end;
     align-items: center;
+    margin-bottom: 0.5em;
+}
+
+input[type="file"] {
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1em;
+    background-color: #dfdfdf;
+    border: 1px solid #ebebeb;
+    border-radius: 0.3em 0.3em;
+}
+
+input[type="button"] {
+    background: linear-gradient(to bottom, #3C3C3C 10%, #505050 100%);
+    outline: none;
+    color: #fff;
+    border-radius: 0.3em 0.3em;
+    font-size: 1em;
+    border: 1px solid #ebebeb;
 }
 
 form {
     outline: none;
     background-color: #fff;
+}
+
+.middle pre {
+    font-size: 1rem;
+    background: linear-gradient(to bottom, #007ACC 0%, #3BCBF6 100%);
 }
