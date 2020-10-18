@@ -123,3 +123,4 @@ CEF
 *.xml
 
 Games
+uploads/*.js
