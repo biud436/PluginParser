@@ -1,0 +1,14 @@
+[
+	{
+		"code": 357,
+		"indent": 0,
+		"parameters": [
+			"GabeMZ_FogEffects",
+			"setFogInMap",
+			"",
+			{
+				"fogInMap": "true"
+			}
+		]
+	}
+]

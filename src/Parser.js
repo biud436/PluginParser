@@ -21,9 +21,6 @@ class Parser extends String {
             this._name = "";
             this._desc = "";
         }
-
-
-
     }
 
     splitOnLast(e) {
@@ -50,11 +47,10 @@ class Parser extends String {
     }
 
     toJson() {
-        const { _type, _name, _desc } = this;
         return {
-            name: _name,
-            type: _type,
-            desc: _desc
+            name: this.name,
+            type: this.type,
+            desc: this.desc
         };
     }
 
@@ -76,4 +72,5 @@ class Parser extends String {
         return new Parser(line);
     }
 }
+
 exports.Parser = Parser;

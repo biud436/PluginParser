@@ -71,13 +71,13 @@ class App extends EventEmitter {
                 line,
                 lineNumber,
             });
-
-            // 라인이 ~struct~로 시작할 경우, 파싱을 끝내고 다시 시작합니다.
-            if (line.indexOf("~struct~") >= 0) {
-                this._isValid = false;   
-                this._startOfLine.pop();        
-            }
         }
+
+        // 라인이 ~struct~로 시작할 경우, 파싱을 끝내고 다시 시작합니다.
+        // if (!this._isValid && line.indexOf("~struct~") >= 0) {
+        //     this._isValid = false;   
+        //     this._startOfLine.pop();        
+        // }
 
         if (this._isValid) {
             const cmt = Parser.parse(line);
@@ -180,8 +180,11 @@ class App extends EventEmitter {
                 this.setParams("description", cmt.desc.slice(0));
                 break;
             case "param":
+                // TODO: 마지막 매개변수에 @default 태그가 없는 경우가 있다 (BUG #1)
                 console.log("@param %s%s%s", Color.BgBlack, cmt.desc, Color.Reset);
                 this.setParams("lastKey", cmt.desc.slice(0));
+                this.setParams("lastValue", "");
+                this.setParams("description", "");
                 break;
             case "command":
                 // 다중 커맨드 파싱 필요
@@ -197,8 +200,9 @@ class App extends EventEmitter {
                 this.setCommandArgsText(cmt.desc.slice(0));
                 break;
             case "type":
+                // TODO: @type struct<>는 파싱이 안된다.
                 if (["command", "param"].includes(this._lastCommand)) {
-                    console.log("@type %s%s%s", Color.FgRed, cmt.name, Color.Reset);
+                    console.log("@type %s%s%s", Color.FgRed, cmt.desc, Color.Reset);
                 }
                 break;
             case "desc":
