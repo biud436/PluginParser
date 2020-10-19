@@ -86,6 +86,11 @@ const server = http.createServer(app).listen(app.get("port"), () => {
 const database = {
     init() {
         this._userTable = {};
+
+        // 업로드 파일이 없으면 새로 만듭니다.
+        if(!fs.existsSync(path.resolve("uploads"))) {
+            fs.mkdirSync(path.resolve("uploads"));
+        }
     },
 
     new(address, id) {

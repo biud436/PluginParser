@@ -26,9 +26,29 @@ class App {
         });
     }
 
+    copyText() {
+        const copyButton = document.querySelector("#copy-text");
+        if(copyButton instanceof HTMLButtonElement) {
+            copyButton.addEventListener("click", () => {
+
+                const options = document.querySelector("select").options;
+                const texts = (options.selectedIndex === 1) ? document.querySelector("#output-data").textContent : document.querySelector(".middle").textContent;
+                navigator.clipboard.writeText(texts).then(() => {
+                    alert("클립보드에 복사가 완료되었습니다.");
+                })                                    
+            });
+        }
+    }
+
     write(message) {
         const newDiv = document.createElement("pre");
         newDiv.innerHTML = message;
+
+        const lines = message.split(/[\r\n]+/);        
+        if(lines.length === 1) {
+            newDiv.id = "output-data";
+        }
+
         document.querySelector(".middle").appendChild(newDiv);        
     }
 
@@ -59,9 +79,7 @@ class App {
                 reject(err);
             }
             xhr.send(formData);
-            // xhr.send(JSON.stringify({
-            //     name: input.value
-            // }));
+
         });
     }
 
@@ -75,6 +93,10 @@ class App {
             }).catch(err => {
                 console.warn(err);
             })
+        });
+
+        window.addEventListener("load", () => {
+            this.copyText();
         });
 
     }

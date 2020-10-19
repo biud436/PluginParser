@@ -3,7 +3,7 @@
 		"code": 357,
 		"indent": 0,
 		"parameters": [
-			"RS_InputDialog",
+			"RS_Window_KorNameEdit",
 			"",
 			"",
 			{}

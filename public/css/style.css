@@ -67,3 +67,24 @@ form {
     font-size: 1rem;
     background: linear-gradient(to bottom, #007ACC 0%, #3BCBF6 100%);
 }
+
+button {
+    background: linear-gradient(to bottom, #3C3C3C 10%, #505050 100%);
+    color: #fff;
+    border-radius: 0.3em 0.3em;
+    font-size: 1em;
+    border: 1px solid #ebebeb;
+}
+
+select {
+    background: linear-gradient(to bottom, #3C3C3C 10%, #505050 100%);
+    outline: none;
+    color: #fff;
+    border-radius: 0.3em 0.3em;
+    font-size: 1em;
+    border: 1px solid #ebebeb;
+}
+
+select:focus {
+    color: #000;
+}

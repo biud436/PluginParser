@@ -10,12 +10,15 @@
     <div class="container">
         <form action="/parse/plugin" enctype="multipart/form-data" method="post">
             <fieldset>
-                <dd>
-                    <dt><label for="name"></label><input type="file" id="name" name="name"></dt>
-                    <dt><input type="button" value="업로드 및 파싱 시작" id="submit" name="submit"></dt>
-                </dd>
+                <label for="name"></label><input type="file" id="name" name="name">
+                <input type="button" value="업로드 및 파싱 시작" id="submit" name="submit">
+                <select name="parse-type" id="parse-option">
+                    <option value="all">전체</option>
+                    <option value="only-parameters">매개변수만</option>
+                </select>  
             </fieldset>
-        </form>          
+        </form>      
+        <button id="copy-text">클립보드로 복사하기</button>
         <div class="middle">
         </div>
     </div>
