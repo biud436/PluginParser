@@ -15,12 +15,6 @@ class Parser extends String {
             this._type = item[0];
             this._name = item[1];
             this._desc = item.slice(1).join(" ");
-
-            if(this._desc.length > this._name.length) {
-                this._name = "";
-            } else if(this._desc.length == this._name.length) {
-                this._desc = "";
-            }
                         
         } catch {
             this._type = "";

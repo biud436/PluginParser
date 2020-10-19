@@ -1,0 +1,61 @@
+[
+	{
+		"name": "(v.1.0)",
+		"type": "plugindesc",
+		"desc": "(v.1.0) Displays an image behind messages in place of the windowskin",
+		"lineNumber": 21
+	},
+	{
+		"name": "http://galvs-scripts.com",
+		"type": "url",
+		"desc": "http://galvs-scripts.com",
+		"lineNumber": 22
+	},
+	{
+		"name": "MZ",
+		"type": "target",
+		"desc": "MZ",
+		"lineNumber": 23
+	},
+	{
+		"name": "Galv",
+		"type": "author",
+		"desc": "Galv",
+		"lineNumber": 24
+	},
+	{
+		"name": "defaultStatus",
+		"type": "param",
+		"desc": "defaultStatus",
+		"lineNumber": 26
+	},
+	{
+		"name": "Default",
+		"type": "text",
+		"desc": "Default On or Off",
+		"lineNumber": 27
+	},
+	{
+		"name": "true",
+		"type": "desc",
+		"desc": "true to default the plugin to on, false to to off. If off, use script call to activate during game.",
+		"lineNumber": 28
+	},
+	{
+		"name": "boolean",
+		"type": "type",
+		"desc": "boolean",
+		"lineNumber": 29
+	},
+	{
+		"name": "true",
+		"type": "default",
+		"desc": "true",
+		"lineNumber": 30
+	},
+	{
+		"type": "help",
+		"desc": "",
+		"lineNumber": 32
+	}
+]

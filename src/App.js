@@ -345,6 +345,7 @@ class App extends EventEmitter {
                         "utf8"
                     );
                     cb();
+
                 }
 
             });

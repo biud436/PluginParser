@@ -9,6 +9,7 @@
   "nodemonConfig": {
     "ignore": [
       "data/*",
+      "uploads",
       "uploads/*"
     ]
   },

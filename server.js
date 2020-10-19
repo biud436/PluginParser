@@ -9,6 +9,9 @@ const socketio = require("socket.io");
 const stringify = require('json-stringify');
 const {PluginParser} = require("./parser");
 const multer = require("multer");
+const { database } = require("./server/database");
+const cp = require("child_process");
+const isRunningProcess = require("./server/checkProcess");
 
 // 익스프레스 객체 생성
 const app = express();
@@ -79,30 +82,9 @@ app.use("/", router);
 
 // 서버 생성
 const server = http.createServer(app).listen(app.get("port"), () => {
+
     console.log(`server start : %d`, app.get("port"));
 });
-
-// 간이 데이터베이스 객체 생성
-const database = {
-    init() {
-        this._userTable = {};
-
-        // 업로드 파일이 없으면 새로 만듭니다.
-        if(!fs.existsSync(path.resolve("uploads"))) {
-            fs.mkdirSync(path.resolve("uploads"));
-        }
-    },
-
-    new(address, id) {
-        this._userTable[address] = id;
-    },
-
-    remove(address) {
-        delete this._userTable[address];
-    }
-};
-
-database.init();
 
 // 웹소켓 통신 시작
 const io = socketio.listen(server);

@@ -99,6 +99,11 @@ class App {
             this.copyText();
         });
 
+        document.querySelector("#remove-uploads-folder").addEventListener("click", () => {
+            alert("업로드 폴더에 있는 플러그인 파일을 제거하였습니다.");
+            this._socket.emit("remove-uploads-folder");
+        });
+
     }
 }
 
