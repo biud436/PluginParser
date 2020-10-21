@@ -42,6 +42,13 @@ class App {
 
     write(message) {
         const newDiv = document.createElement("pre");
+
+        // < 과 >은 표시가 되지 않음.
+        message = message.replace(/[\&]+/g, "&amp;");                
+        message = message.replace(/[\<]+/g, "&lt;");
+        message = message.replace(/[\>]+/g, "&gt;");
+        message = message.replace(/[\"]+/g, "&quot;");
+
         newDiv.innerHTML = message;
 
         const lines = message.split(/[\r\n]+/);        
