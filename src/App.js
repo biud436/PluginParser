@@ -27,6 +27,7 @@ class App extends EventEmitter {
         this._lastCommandIndex = -1;
 
         this._argsData = [];
+        this._allArgsData = [];
 
         this._startOfLine = [];
         this._endOfLine = [];
@@ -42,6 +43,8 @@ class App extends EventEmitter {
         this._allData = [];
 
         this._unknownData = [];
+
+        this._lineWatcher = require("./LineWatcher");
     }
     
     /**
@@ -67,17 +70,11 @@ class App extends EventEmitter {
         // 라인이 /*: 으로 시작할 경우를 찾습니다.
         if (line.indexOf("/*:") >= 0) {
             this._isValid = true;
-            this._startOfLine.push({
+            this._lineWatcher.watch({
                 line,
                 lineNumber,
             });
         }
-
-        // 라인이 ~struct~로 시작할 경우, 파싱을 끝내고 다시 시작합니다.
-        // if (!this._isValid && line.indexOf("~struct~") >= 0) {
-        //     this._isValid = false;   
-        //     this._startOfLine.pop();        
-        // }
 
         if (this._isValid) {
             const cmt = Parser.parse(line);
@@ -90,7 +87,7 @@ class App extends EventEmitter {
 
             if (line.indexOf("*/") >= 0) {
                 this._isValid = false;
-                this._endOfLine.push({
+                this._lineWatcher.end({
                     line,
                     lineNumber,
                 });
@@ -277,6 +274,7 @@ class App extends EventEmitter {
                 outputFile.create();
             } else {
                 this._argsData.push(temp);
+                this._allArgsData.push(temp);
             }
 
         }
